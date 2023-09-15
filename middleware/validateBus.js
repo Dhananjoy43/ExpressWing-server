@@ -2,33 +2,33 @@ const { body, checkSchema } = require('express-validator');
 
 const validateBus = checkSchema({
 
-    busName: {
+    name: {
         in: ['body'],
         isLength: {
             options: { min: 3 },
             errorMessage: 'Bus name must be at least 3 characters long',
         },
     },
-    'depurture.time': {
+    'depurture_time': {
         in: ['body'],
         isISO8601: {
             errorMessage: 'Invalid time format for depurture time',
         },
     },
-    'depurture.location': {
-        in: ['body'],
-        isLength: {
-            options: { min: 3 },
-            errorMessage: 'Depurture location must be at least 3 characters long',
-        },
-    },
-    'arrival.time': {
+    'arrival_time': {
         in: ['body'],
         isISO8601: {
             errorMessage: 'Invalid time format for arrival time',
         },
     },
-    'arrival.location': {
+    'source': {
+        in: ['body'],
+        isLength: {
+            options: { min: 3 },
+            errorMessage: 'Source must be at least 3 characters long',
+        },
+    },
+    'destination': {
         in: ['body'],
         isLength: {
             options: { min: 3 },

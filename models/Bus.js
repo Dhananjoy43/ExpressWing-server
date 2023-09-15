@@ -6,29 +6,25 @@ const BusSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'agency'
     },
-    busName: {
+    name: {
         type: String,
         required: true
     },
-    depurture: {
-        time: {
-            type: Date,
-            required: true
-        },
-        location: {
-            type: String,
-            required: true
-        }
+    depurture_time: {
+        type: Date,
+        required: true
     },
-    arrival: {
-        time: {
-            type: Date,
-            required: true
-        },
-        location: {
-            type: String,
-            required: true
-        }
+    arrival_time: {
+        type: Date,
+        required: true
+    },
+    source: {
+        type: String,
+        required: true
+    },
+    destination: {
+        type: String,
+        required: true
     },
     seatArrangement: [{
         seatNumber: {
