@@ -8,8 +8,8 @@ const { body, param, validationResult } = require('express-validator');
 // ROUTE 1: Get All the Buses using: GET "/api/booking/searchbus". Login required
 router.get('/searchbus', async (req, res) => {
     try {
-        const buses = await Bus.find();
-        res.json(buses)
+        const buses = await Bus.find(req.query);
+        res.status(200).json(buses)
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
