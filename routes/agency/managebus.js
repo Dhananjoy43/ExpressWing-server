@@ -17,9 +17,7 @@ router.get('/allbuses', fetchAgency, async (req, res) => {
 })
 
 // ROUTE 2: Add a new Bus using: POST "/api/agency/managebus/addbus". Login required
-router.post('/addbus', fetchAgency, validateBus, [
-    // Validation middleware...
-], async (req, res) => {
+router.post('/addbus', fetchAgency, validateBus, async (req, res) => {
     try {
         const { name, departure_time, arrival_time, source, destination, seatArrangement, AC, fare, amenities, cancellationPolicy } = req.body;
 
