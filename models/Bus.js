@@ -10,7 +10,7 @@ const BusSchema = new Schema({
         type: String,
         required: true
     },
-    depurture_time: {
+    departure_time: {
         type: Date,
         required: true
     },

@@ -21,7 +21,7 @@ router.post('/addbus', fetchAgency, validateBus, [
     // Validation middleware...
 ], async (req, res) => {
     try {
-        const { name, depurture_time, arrival_time, source, destination, seatArrangement, AC, fare, amenities, cancellationPolicy } = req.body;
+        const { name, departure_time, arrival_time, source, destination, seatArrangement, AC, fare, amenities, cancellationPolicy } = req.body;
 
         // If there are errors, return Bad request and the errors
         const errors = validationResult(req);
@@ -31,7 +31,7 @@ router.post('/addbus', fetchAgency, validateBus, [
 
         // Create a new bus object
         const bus = new Bus({
-            name, depurture_time, arrival_time, source, destination, seatArrangement, AC, fare, amenities, cancellationPolicy, agency: req.agency.id
+            name, departure_time, arrival_time, source, destination, seatArrangement, AC, fare, amenities, cancellationPolicy, agency: req.agency.id
         });
 
         // Save the bus object to the database
@@ -50,11 +50,11 @@ router.post('/addbus', fetchAgency, validateBus, [
 router.put('/updatebus/:id', fetchAgency, validateBus, async (req, res) => {
     let success = false;
     try {
-        const { name, depurture_time, arrival_time, source, destination, seatArrangement, AC, fare, amenities, cancellationPolicy } = req.body;
+        const { name, departure_time, arrival_time, source, destination, seatArrangement, AC, fare, amenities, cancellationPolicy } = req.body;
         // Create a newBus object
         const newBus = {};
         if (name) { newBus.name = name };
-        if (depurture_time) { newBus.depurture_time = depurture_time };
+        if (departure_time) { newBus.departure_time = departure_time };
         if (arrival_time) { newBus.arrival_time = arrival_time };
         if (source) { newBus.source = source };
         if (destination) { newBus.destination = destination };

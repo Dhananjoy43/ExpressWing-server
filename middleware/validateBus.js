@@ -9,7 +9,7 @@ const validateBus = checkSchema({
             errorMessage: 'Bus name must be at least 3 characters long',
         },
     },
-    'depurture_time': {
+    'departure_time': {
         in: ['body'],
         isISO8601: {
             errorMessage: 'Invalid time format for departure time',
