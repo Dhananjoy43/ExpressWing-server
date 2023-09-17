@@ -1,20 +1,48 @@
 const express = require('express');
+const moment = require('moment');
 const router = express.Router();
 const fetchuser = require('../../middleware/fetchUser');
 const Bus = require('../../models/Bus');
 const { body, param, validationResult } = require('express-validator');
 
 
-// ROUTE 1: Get All the Buses using: GET "/api/booking/searchbus". Login required
+// ROUTE 1: Get All the Buses using: GET "/api/booking/searchbus". Login not required
+
 router.get('/searchbus', async (req, res) => {
     try {
-        const buses = await Bus.find(req.query);
-        res.status(200).json(buses)
+        const { startTime, endTime, source, destination } = req.query;
+
+        // Create an object to hold the query conditions
+        const queryConditions = {};
+
+        // Add source and destination to the query if provided
+        if (source) {
+            queryConditions.source = source;
+        }
+        if (destination) {
+            queryConditions.destination = destination;
+        }
+
+        // Parse the startTime and endTime inputs into JavaScript Date objects
+        if (startTime && endTime) {
+            const parsedStartTime = moment(startTime);
+            const parsedEndTime = moment(endTime);
+
+            // Add the time range conditions to the query
+            queryConditions.departure_time = {
+                $gte: parsedStartTime.toDate(),
+                $lte: parsedEndTime.toDate(),
+            };
+        }
+
+        // Use the queryConditions object in the find method
+        const buses = await Bus.find(queryConditions);
+        res.status(200).json(buses);
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
     }
-})
+});
 
 // ROUTE 2: Book a seat using: POST "/api/booking/bookseat". Login required
 router.post('/bookseat/:id', fetchuser, [

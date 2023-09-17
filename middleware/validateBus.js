@@ -14,33 +14,16 @@ const validateBus = checkSchema({
         isISO8601: {
             errorMessage: 'Invalid time format for departure time',
         },
-        custom: (value, { req }) => {
-            // Convert the input UTC time to IST time
-            const inputDate = new Date(value);
-            const istOffset = 330 * 60000; // IST offset: 5 hours and 30 minutes in milliseconds
-            const istDate = new Date(inputDate.getTime() + istOffset);
-
-            // Update the 'departure_time' field in the request to IST time
-            req.body.departure_time = istDate.toISOString();
-            return true;
-        },
     },
+
     'arrival_time': {
         in: ['body'],
         isISO8601: {
             errorMessage: 'Invalid time format for arrival time',
         },
-        custom: (value, { req }) => {
-            // Convert the input UTC time to IST time
-            const inputDate = new Date(value);
-            const istOffset = 330 * 60000; // IST offset: 5 hours and 30 minutes in milliseconds
-            const istDate = new Date(inputDate.getTime() + istOffset);
 
-            // Update the 'arrival_time' field in the request to IST time
-            req.body.arrival_time = istDate.toISOString();
-            return true;
-        },
     },
+
     'source': {
         in: ['body'],
         isLength: {
